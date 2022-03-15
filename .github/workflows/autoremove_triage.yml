@@ -6,7 +6,7 @@ on:
     types: [opened]
 jobs:
   RemoveNeedsTriageFromMembers:
-    if: github.event.action == 'opened' && !contains( secrets.MAINTAINER_LIST, github.actor) && contains(github.event.*.labels.*.name, 'needs-triage')
+    if: ( github.event.action == 'opened' && !contains( secrets.MAINTAINER_LIST, github.actor) && ${{ contains(github.event.*.labels.*.name, 'needs-triage') }})
     runs-on: ubuntu-latest
     steps:
       - name: Remove needs-triage label from member's PRs and Issues
